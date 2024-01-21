@@ -1,0 +1,40 @@
+﻿<h3>@Loc.GetText("LoginTitle")</h3>
+@page "/Login/Login"
+
+@inject LoginApiClient loginClient
+@inject ILocalStorageService _localStorage
+
+<MudPaper Class="pa-4 mx-auto" Style="max-width: 500px">
+    <EditForm Model="@registerRequest" >
+        <DataAnnotationsValidator />
+
+        <MudTextField Label="Email" @bind-Value="@registerRequest.Email" For="@(() => registerRequest.Email)" FullWidth />
+
+        <MudTextField Label="Mot de passe" @bind-Value="@registerRequest.Password" For="@(() => registerRequest.Password)" FullWidth InputType="MudBlazor.InputType.Password" />
+
+        <MudButton Type="ButtonType.Submit" Color="Color.Primary" OnClick="HandleValidSubmit">S'inscrire</MudButton>
+    </EditForm>
+</MudPaper>
+
+    @code {
+    private LoginRequest registerRequest = new();
+
+    private async Task HandleValidSubmit()
+    {
+        var requestedToken = await loginClient.LoginUser(registerRequest);
+        if(requestedToken is not null){
+            await SaveTokenAsync(requestedToken.AccessToken, requestedToken.RefreshToken, requestedToken.ExpiresIn);
+            NavigationManager.NavigateTo("/", true);
+        }
+        else
+        {
+            
+        }
+    }
+    public async Task SaveTokenAsync(string token, string refreshToken, long expiresIn)
+    {
+        await _localStorage.SetItemAsync(Const.AUTH_TOKEN, token);
+        await _localStorage.SetItemAsync(Const.AUTH_TOKEN_REFRESH, refreshToken);
+        await _localStorage.SetItemAsync(Const.AUTH_TOKEN_EXPIRE_IN, DateTime.UtcNow.AddSeconds(expiresIn));
+    }
+}

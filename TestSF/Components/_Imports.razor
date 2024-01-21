@@ -7,11 +7,16 @@
 @using static Microsoft.AspNetCore.Components.Web.RenderMode
 @using Microsoft.AspNetCore.Components.Web.Virtualization
 @using Microsoft.JSInterop
-@using TestSF
-@using TestSF.Components
+@using CoolPlanner.Web.Components
 @using Syncfusion.Blazor
 @using CoolPlanner.CrossCutting
 @using CoolPlanner.Web
-@using Syncfusion.Blazor.Inputs
 @using MudBlazor
 @using MudBlazor.Components
+@using Blazored.LocalStorage
+@using CoolPlanner.CrossCutting.Constantes
+@using System.Globalization
+@using Microsoft.AspNetCore.Components
+
+@inject RessourceLocalizer Loc
+@inject NavigationManager NavigationManager

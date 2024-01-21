@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CoolPlanner.CrossCutting;
+using CoolPlanner.CrossCutting.Constantes;
+using Microsoft.AspNetCore.Mvc;
 using Plantoufle.Repository;
-using CoolPlanner.ApiLogin;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -14,14 +15,14 @@ public class MissionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Mission>>> GetAllMissions()
+    public async Task<ActionResult<IEnumerable<MissionModel>>> GetAllMissions()
     {
         var missions = await _missionRepository.GetAllAsync();
         return Ok(missions);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Mission>> GetMissionById(int id)
+    public async Task<ActionResult<MissionModel>> GetMissionById(int id)
     {
         var mission = await _missionRepository.GetByIdAsync(id);
         if (mission == null)
@@ -32,9 +33,19 @@ public class MissionsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Mission>> CreateMission(Mission mission)
+    public async Task<ActionResult<MissionModel>> CreateMission(MissionModel mission)
     {
-        var createdMission = await _missionRepository.AddAsync(mission);
+        var userid = Request.Headers.GetCommaSeparatedValues(Const.USER_ID);
+        Mission missionEntity = new Mission()
+        {
+            Body = mission.Body,
+            DeadlineDate = mission.DeadlineDate.HasValue ? mission.DeadlineDate.Value : new DateTime(),
+            DeadlineType = mission.DeadlineType,
+            Done = mission.Done,
+            Title = mission.Title
+        };
+
+        var createdMission = await _missionRepository.AddAsync(missionEntity);
         return CreatedAtAction(nameof(GetMissionById), new { id = createdMission.Id }, createdMission);
     }
 

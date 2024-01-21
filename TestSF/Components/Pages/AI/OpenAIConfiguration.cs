@@ -1,4 +1,4 @@
-﻿namespace TestSF.Components.Pages.AI
+﻿namespace CoolPlanner.Web.Components.Pages.AI
 {
     public static class OpenAIConfiguration
     {

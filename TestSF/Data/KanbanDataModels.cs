@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TestSF.Data
+namespace CoolPlanner.Web.Data
 {
     public class KanbanDataModels
     {

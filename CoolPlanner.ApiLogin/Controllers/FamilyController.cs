@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Plantoufle.Model;
 using Plantoufle.Repository;
-using CoolPlanner.ApiLogin;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]

@@ -1,13 +1,14 @@
-﻿using CoolPlanner.Web;
+﻿using Blazored.LocalStorage;
+using CoolPlanner.Web;
+using CoolPlanner.Web.Components;
+using CoolPlanner.Web.Data;
+using CoolPlanner.Web.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor.Services;
 using Syncfusion.Blazor;
-using TestSF.Components;
-using TestSF.Data;
-using TestSF.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,13 +19,12 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMudServices();
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF1cWWhIfEx1RHxQdld5ZFRHallYTnNWUj0eQnxTdEZiWHxecH1UT2FeVEN+Vw==");
-
-builder.AddServiceDefaults();
+//builder.AddRedisOutputCache("cache");
 builder.Services.AddControllers();
 
-builder.Services.AddHttpClient<LoginApiClient>(client => client.BaseAddress = new("http://apilogin"));
+builder.Services.AddHttpClient<LoginApiClient>(client => client.BaseAddress = new("https://localhost:44350"));
 
-builder.Services.AddSingleton(typeof(ISyncfusionStringLocalizer), typeof(SyncfusionLocalizer));
+builder.Services.AddSingleton(typeof(RessourceLocalizer));
 var supportedCultures = new[] { "en-US", "de", "fr", "ar", "zh" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture(supportedCultures[0])
@@ -35,6 +35,8 @@ builder.Services.AddScoped<UserAccessor>();
 builder.Services.AddScoped<IdentityRedirectManager>();
 builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
 
+builder.Services.AddAuthorizationCore();
+builder.Services.AddBlazoredLocalStorage();
 
 builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
     .AddIdentityCookies();
@@ -72,12 +74,10 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
-
+//app.UseOutputCache();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 // Add additional endpoints required by the Identity /Account Razor components.
-app.MapAdditionalIdentityEndpoints();
-
 app.MapControllers();
 app.Run();

@@ -1,4 +1,4 @@
-﻿namespace TestSF.Components.Pages.AI
+﻿namespace CoolPlanner.Web.Components.Pages.AI
 {
     using OpenAI_API; // Assurez-vous d'importer l'espace de noms
     using OpenAI_API.Completions;

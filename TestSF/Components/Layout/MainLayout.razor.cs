@@ -1,6 +1,6 @@
 using MudBlazor;
 
-namespace TestSF.Components.Layout
+namespace CoolPlanner.Web.Components.Layout
 {
     public partial class MainLayout
     {
@@ -15,7 +15,7 @@ namespace TestSF.Components.Layout
             open = !open;
         }
 
-      
+
     }
 
     public static class Themes

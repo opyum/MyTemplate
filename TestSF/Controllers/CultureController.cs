@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 
-namespace TestSF.Controllers
+namespace CoolPlanner.Web.Controllers
 {
     [Route("[controller]/[action]")]
     public class CultureController : Controller

@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-TestSF-25203999-0372-49f5-81d4-f945c8240c96</UserSecretsId>
+    <IsAspireSharedProject>true</IsAspireSharedProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+    <PackageReference Include="MudBlazor" Version="6.11.1" />
+    <PackageReference Include="OpenAI" Version="1.9.0" />
+    <PackageReference Include="Syncfusion.Blazor.Charts" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Blazor.Diagram" Version="23.2.6" />
+            <PackageReference Include="Syncfusion.Blazor.Kanban" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Blazor.Navigations" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="23.2.6" />
+    <PackageReference Include="Syncfusion.Blazor.DropDowns" Version="23.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoolPlanner.CrossCutting\Template.CrossCutting.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\SfResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SfResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SfResources.resx">
+       <Generator>PublicResXFileCodeGenerator</Generator>
+       <LastGenOutput>SfResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Identity\Extensions\" />
+  </ItemGroup>
+
+</Project>

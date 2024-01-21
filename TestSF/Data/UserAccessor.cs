@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using TestSF.Identity;
+using CoolPlanner.Web.Identity;
 
-namespace TestSF.Data
+namespace CoolPlanner.Web.Data
 {
     internal sealed class UserAccessor(
         IHttpContextAccessor httpContextAccessor,

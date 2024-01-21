@@ -1,0 +1,57 @@
+﻿@page "/missionlist"
+@inject LoginApiClient loginClient
+
+@if (missions != null && missions.Any())
+{
+    <MudGrid>
+        @foreach (var mission in missions)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard>
+                    <MudCardContent>
+                        <MudText Typo="Typo.h6">@mission.Title</MudText>
+                        <MudText>@mission.Body</MudText>
+                        <MudText Color="Color.Secondary">Échéance : @GetDeadlineText(mission)</MudText>
+                        <MudChip Color="@GetStatusColor(mission.Done)" OnClick="() => CheckDone(mission)">@(mission.Done ? "Terminée" : "En cours")</MudChip>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+}
+else
+{
+    <MudText>Aucune mission disponible.</MudText>
+}
+
+@code {
+    private List<MissionModel> missions = new List<MissionModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            missions = await loginClient.GetAllMission();
+        }
+        catch (Exception ex)
+        {
+            // Gérer l'exception (log, afficher un message, etc.)
+        }
+    }
+
+    private void CheckDone(MissionModel mission)
+    {
+        mission.Done = !mission.Done;
+        StateHasChanged(); // Signaler un changement d'état pour rafraîchir l'UI
+    }
+
+    private string GetDeadlineText(MissionModel mission)
+    {
+        return mission.DeadlineDate.HasValue ? mission.DeadlineDate.Value.ToString("dd/MM/yyyy") : "Non définie";
+    }
+
+    private Color GetStatusColor(bool done)
+    {
+        return done ? Color.Success : Color.Warning;
+    }
+}

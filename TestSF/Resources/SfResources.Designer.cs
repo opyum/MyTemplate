@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TestSF.Resources {
+namespace Template.Web.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TestSF.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TestSF.Resources.SfResources", typeof(SfResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Template.Web.Resources.SfResources", typeof(SfResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,32 +1,27 @@
-﻿using AutoMapper;
+﻿using CoolPlanner.CrossCutting;
 using Microsoft.AspNetCore.Mvc;
-using Plantoufle.Model;
 using Plantoufle.Repository;
-using CoolPlanner.ApiLogin;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
-    private readonly IRepository<FamilyMember> _userRepository;
+    private readonly IRepository<Sample> _userRepository;
 
-    public UsersController(IRepository<FamilyMember> userRepository)
+    public UsersController(IRepository<Sample> userRepository)
     {
         _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<FamilyMember>>> GetAllUsers()
+    public async Task<ActionResult<IEnumerable<Sample>>> GetAllUsers()
     {
         var users = await _userRepository.GetAllAsync();
         return Ok(users);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<FamilyMember>> GetUserById(int id)
+    public async Task<ActionResult<Sample>> GetUserById(int id)
     {
         var user = await _userRepository.GetByIdAsync(id);
         if (user == null)
@@ -36,28 +31,25 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
+
     [HttpPost]
-    public async Task<ActionResult<FamilyMember>> CreateUser(UserModel user)
+    public async Task<ActionResult<UserRecordModel>> CreateUser(UserRecordModel user)
     {
-        FamilyMember userEntity = new FamilyMember()
+        Sample familyMember = new Sample()
         {
-            //Id = user.Id,
             Email = user.Email,
-            //Password = user.Password,
-            //ConfirmPassword = user.ConfirmPassword,
-            //Login = user.Name,
-            //Name = user.Name,
+            Id = user.Id,
+            Name = user.Name,
             PhoneNumber = user.PhoneNumber,
-            //Role = "Clodo",
-            //Token = user.Token,
+            Role = user.Role,
         };
-        var createdUser = await _userRepository.AddAsync(userEntity);
+        var createdUser = await _userRepository.AddAsync(familyMember);
         return CreatedAtAction(nameof(GetUserById), new { id = createdUser.Id }, createdUser);
     }
 
   
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateUser(int id, FamilyMember user)
+    public async Task<IActionResult> UpdateUser(int id, Sample user)
     {
         //if (id != user.Id)
         //{
@@ -80,4 +72,5 @@ public class UsersController : ControllerBase
         await _userRepository.DeleteAsync(user);
         return NoContent();
     }
+
 }

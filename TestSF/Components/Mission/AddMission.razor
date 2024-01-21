@@ -1,0 +1,29 @@
+﻿@page "/AddMission"
+@inject LoginApiClient loginClient
+<MudPaper Class="ma-4 p-4">
+    <MudText Typo="Typo.h5">Créer une Tâche</MudText>
+    <MudForm Model="@taskModel">
+        <MudTextField  Label="Titre" @bind-Value="taskModel.Title" FullWidth />
+        <MudTextField Label="Corps" @bind-Value="taskModel.Body" FullWidth Multiline Rows="4" />
+        <MudCheckBox @bind-Checked="taskModel.Done">Fait</MudCheckBox>
+
+        <MudSelect T="int" Label="Type d'échéance" @bind-Value="taskModel.DeadlineType">
+            <MudSelectItem Value="0" Content="Type 0" />
+            <MudSelectItem Value="1" Content="Type 1" />
+            <!-- Ajouter d'autres types si nécessaire -->
+        </MudSelect>
+
+        <MudDatePicker Label="Date d'échéance" @bind-Date="taskModel.DeadlineDate"  />
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@SubmitForm">Soumettre</MudButton>
+    </MudForm>
+</MudPaper>
+
+@code {
+    private MissionModel taskModel = new();
+
+    private void SubmitForm()
+    {
+        loginClient.CreateMission(taskModel);
+    }
+}

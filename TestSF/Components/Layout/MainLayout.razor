@@ -9,9 +9,9 @@
 
 <MudLayout>
     <MudAppBar Elevation="1">
-        <button type="button" @onclick="(() => ToggleDrawer())">oldJS</button> 
         <MudIconButton Icon="@Icons.Material.Filled.Menu"  Color="Color.Inherit"  OnClick="@(() => ToggleDrawer())" />
         <MudSpacer />
+        <b>CurrentCulture</b>: @CultureInfo.CurrentCulture
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Link="https://github.com/MudBlazor/MudBlazor" Target="_blank" />
     </MudAppBar>
     <MudDrawer @bind-Open="@open" Elevation="2">

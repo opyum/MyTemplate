@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Diagnostics.CodeAnalysis;
 
-namespace TestSF.Identity
+namespace CoolPlanner.Web.Identity
 {
     internal sealed class IdentityRedirectManager(
         NavigationManager navigationManager,

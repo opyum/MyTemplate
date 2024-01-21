@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoolPlanner.CrossCutting\CoolPlanner.CrossCutting.csproj" />
-    <ProjectReference Include="..\CoolPlanner.ServiceDefaults\CoolPlanner.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

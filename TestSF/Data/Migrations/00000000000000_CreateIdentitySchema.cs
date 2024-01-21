@@ -3,7 +3,7 @@ using System;
 
 #nullable disable
 
-namespace TestSF.Migrations
+namespace CoolPlanner.Web.Migrations
 {
     /// <inheritdoc />
     public partial class CreateIdentitySchema : Migration

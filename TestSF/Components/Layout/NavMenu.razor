@@ -1,17 +1,23 @@
-﻿@using TestSF.Components.Identity
-
-
-<MudNavMenu>
+﻿<MudNavMenu>
     <MudNavLink Href="/" Match="NavLinkMatch.All">Dashboard</MudNavLink>
-    <MudNavLink Href="/servers" Match="NavLinkMatch.Prefix">Servers</MudNavLink>
-    <MudNavGroup Title="Settings" Expanded="true">
+    <MudNavLink Href="/weather" Match="NavLinkMatch.All">Weather</MudNavLink>
+    <MudNavGroup Title="Mission" Expanded="true">
+        <MudNavLink Href="/addMission" Match="NavLinkMatch.All">Ajouter une mission</MudNavLink>
+        <MudNavLink Href="/missionlist" Match="NavLinkMatch.All">Liste des missions</MudNavLink>
+    </MudNavGroup>
+    <MudNavGroup Title="Login" Expanded="true">
+        <MudNavLink Href="/Login/Register" Match="NavLinkMatch.Prefix">Register</MudNavLink>
+        <MudNavLink Href="/Login/Login" Match="NavLinkMatch.Prefix">Login</MudNavLink>
+    </MudNavGroup>
+
+    <MudNavGroup Title="Mes tests" Expanded="true">
         <MudNavLink Href="/charts-features" Match="NavLinkMatch.Prefix">Charts</MudNavLink>
         <MudNavLink Href="/diagram-features" Match="NavLinkMatch.Prefix">Diagramme</MudNavLink>
         <MudNavLink Href="/DiagramGenerator" Match="NavLinkMatch.Prefix">Diagramme - IA</MudNavLink>
     </MudNavGroup>
-    <MudNavLink Href="/about"  Match="NavLinkMatch.Prefix">About</MudNavLink>
+    <MudNavLink Href="/about" Match="NavLinkMatch.Prefix">About</MudNavLink>
 </MudNavMenu>
-@* 
+@*
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">TestSF</a>
@@ -39,7 +45,7 @@
                 <span class="bi bi-list-nested" aria-hidden="true"></span> Weather
             </NavLink>
         </div>
-		
+
             	<div class="nav-item px-3">
  	<NavLink class="nav-link" href="kanban-features">
  	<span class="syncfusion-blazor-icons syncfusion-blazor-icon-kanban" aria-hidden="true"></span><span class="displayText">Kanban</span>

@@ -1,27 +1,32 @@
-﻿<h3>Register</h3>
+﻿<h3>@Loc.GetText("RegisterTitle")</h3>
 @page "/Login/Register"
 
 @inject LoginApiClient loginClient
 
 
 <MudPaper Class="pa-4 mx-auto" Style="max-width: 500px">
-    <EditForm Model="@registerRequest" OnValidSubmit="HandleValidSubmit">
+    <EditForm Model="@CreateAccount">
         <DataAnnotationsValidator />
 
-        <MudTextField Label="Email" @bind-Value="@registerRequest.Email" For="@(() => registerRequest.Email)" FullWidth />
+        <MudTextField Label="Nom" @bind-Value="@CreateAccount.Name" For="@(() => CreateAccount.Name)" FullWidth />
+        <MudTextField Label="FirstName" @bind-Value="@CreateAccount.FirstName" For="@(() => CreateAccount.FirstName)" FullWidth />
+        <MudTextField Label="Login" @bind-Value="@CreateAccount.Login" For="@(() => CreateAccount.Login)" FullWidth />
+        <MudTextField Label="Numéro de téléphone" @bind-Value="@CreateAccount.PhoneNumber" For="@(() => CreateAccount.PhoneNumber)" FullWidth />
+        <MudTextField Label="Email" @bind-Value="@CreateAccount.Email" For="@(() => CreateAccount.Email)" FullWidth />
+        <MudTextField Label="Mot de passe" @bind-Value="@CreateAccount.Password" InputType="InputType.Password" For="@(() => CreateAccount.Password)"  FullWidth />
+        <MudTextField Label="Confirmer le mot de passe" @bind-Value="@CreateAccount.ConfirmPassword" InputType="InputType.Password" For="@(() => CreateAccount.ConfirmPassword)" FullWidth />
 
-        <MudTextField Label="Mot de passe" @bind-Value="@registerRequest.Password" For="@(() => registerRequest.Password)" FullWidth InputType="MudBlazor.InputType.Password" />
-
-        <MudButton Type="ButtonType.Submit" Color="Color.Primary">S'inscrire</MudButton>
+        <MudButton Type="ButtonType.Submit" Color="Color.Primary" OnClick="HandleValidSubmit">S'inscrire</MudButton>
     </EditForm>
 </MudPaper>
 
 @code {
-    private RegisterRequest registerRequest = new();
+    private UserRecordModel CreateAccount = new();
 
     private async Task HandleValidSubmit()
     {
-        await loginClient.RegisterUser(registerRequest);
+        if (await loginClient.RegisterUser(CreateAccount) && await loginClient.CreateUser(CreateAccount))
+            NavigationManager.NavigateTo("/", true);
     }
 
 }
